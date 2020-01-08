@@ -100,7 +100,7 @@ function Content({ selectedPost }) {
   } else {
     content = (
       <div className={classes.notItems}>
-        <span>Click a Post!</span>
+        <span>{'Click a Post!'}</span>
       </div>
     )
   }

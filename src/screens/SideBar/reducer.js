@@ -2,7 +2,9 @@ import {
   FETCHING_LIST,
   FETCHED_LIST,
   FAILED_LIST,
-  SELECTED_POST
+  SELECTED_POST,
+  REMOVE_POST,
+  RESET_LIST
 } from './actions'
 
 const initialState = {
@@ -60,6 +62,22 @@ const EntriesList = (state = initialState, action) => {
         entries: newList
       }
     }
+
+    case REMOVE_POST:
+      const newList = state.entries.filter((item) => {
+        return item.data.id !== payload.data.id
+      })
+
+      return {
+        ...state,
+        entries: newList
+      }
+
+    case RESET_LIST:
+      return {
+        ...state,
+        entries: []
+      }
 
     default:
       return state

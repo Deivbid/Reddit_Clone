@@ -118,6 +118,7 @@ function SideBarItem({
   num_comments,
   imgUrl,
   handleClickEntry,
+  handleRemoveEntry,
   highlight,
   readed
 }) {
@@ -149,7 +150,7 @@ function SideBarItem({
         </div>
       </div>
       <div className={classes.actions}>
-        <div className={classes.dismiss}>
+        <div className={classes.dismiss} onClick={handleRemoveEntry}>
           <CloseIcon className={classes.closeIcon} />
           <span className={classes.dismissText}>{'Dissmiss Post'}</span>
         </div>

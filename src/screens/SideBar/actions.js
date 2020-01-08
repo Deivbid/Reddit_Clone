@@ -7,6 +7,10 @@ export const FAILED_LIST = 'FAILED_LIST'
 
 export const SELECTED_POST = 'SELECTED_POST'
 
+export const REMOVE_POST = 'REMOVE_POST'
+
+export const RESET_LIST = 'RESET_LIST'
+
 export const startSearchList = () => ({
   type: FETCHING_LIST
 })
@@ -34,5 +38,18 @@ export const selectPost = (post = {}) => {
   return {
     type: SELECTED_POST,
     payload: post
+  }
+}
+
+export const removePost = (post = {}) => {
+  return {
+    type: REMOVE_POST,
+    payload: post
+  }
+}
+
+export const resetList = () => {
+  return {
+    type: RESET_LIST
   }
 }

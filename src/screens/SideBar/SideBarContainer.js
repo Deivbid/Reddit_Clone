@@ -1,6 +1,6 @@
 //this 'Container Component' Is to separate redux logic from the core component
 import { connect } from 'react-redux'
-import { getList, selectPost } from './actions'
+import { getList, selectPost, removePost, resetList } from './actions'
 import SideBar from './SideBar'
 
 function mapStateToProps(state) {
@@ -15,7 +15,9 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   getList,
-  selectPost
+  selectPost,
+  removePost,
+  resetList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SideBar)
