@@ -2,6 +2,8 @@ import React from 'react'
 import { PropTypes as ptypes } from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import MenuIcon from '@material-ui/icons/MenuRounded'
+import Hidden from '@material-ui/core/Hidden'
 
 const genericImage = `https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png`
 
@@ -58,10 +60,29 @@ const useStyles = makeStyles({
   image: {
     maxWidth: 150,
     height: 'auto'
+  },
+
+  menuContainer: {
+    position: 'absolute',
+    left: 20,
+    top: 20
+  },
+
+  menu: {
+    color: 'white',
+    width: 25,
+    height: 25,
+    '&:hover': {
+      cursor: 'pointer'
+    }
+  },
+
+  drawerContainer: {
+    display: 'flex'
   }
 })
 
-function Content({ selectedPost }) {
+function Content({ selectedPost, toggleDrawer }) {
   const classes = useStyles()
   let content
 
@@ -105,11 +126,21 @@ function Content({ selectedPost }) {
     )
   }
 
-  return <div className={classes.container}>{content}</div>
+  return (
+    <div className={classes.container}>
+      <Hidden smUp implementation='css'>
+        <div className={classes.menuContainer}>
+          <MenuIcon className={classes.menu} onClick={toggleDrawer(true)} />
+        </div>
+      </Hidden>
+      {content}
+    </div>
+  )
 }
 
 Content.propTypes = {
-  selectedPost: ptypes.object
+  selectedPost: ptypes.object,
+  toggleDrawer: ptypes.func
 }
 
 export default Content

@@ -1,15 +1,16 @@
-//this 'Container Component' Is to separate redux logic from the core component
 import { connect } from 'react-redux'
 import { getList, selectPost, removePost, resetList } from './actions'
 import SideBar from './SideBar'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   const { entries, isFetching, selectedPost } = state
 
   return {
     list: entries,
     isFetching,
-    selectedPost
+    selectedPost,
+    toggleDrawer: ownProps.toggleDrawer || null,
+    mobileOpen: ownProps.mobileOpen || false
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 //Core Components
@@ -15,10 +15,16 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
+
+  const toggleDrawer = (flag) => () => {
+    setOpen(flag)
+  }
+
   return (
     <div className={classes.container}>
-      <SideBar />
-      <Content />
+      <SideBar mobileOpen={open} toggleDrawer={toggleDrawer(false)} />
+      <Content toggleDrawer={toggleDrawer} />
     </div>
   )
 }

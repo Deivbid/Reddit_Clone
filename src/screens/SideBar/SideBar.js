@@ -8,9 +8,13 @@ import ListHeader from '../../components/ListHeader'
 import ListFooter from '../../components/ListFooter'
 import SideBarItem from '../../components/SideBarItem'
 
+//Material (Responsive)
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+
 const genericImage = `https://logodownload.org/wp-content/uploads/2018/02/reddit-logo-16.png`
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',
     backgroundColor: '#37383a',
@@ -21,8 +25,18 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     height: '100%',
     overflowY: 'auto'
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: 380,
+      flexShrink: 0
+    }
+  },
+  drawerPaper: {
+    width: 380,
+    border: 'none'
   }
-})
+}))
 
 function SideBar({
   list,
@@ -30,7 +44,9 @@ function SideBar({
   selectPost,
   selectedPost,
   removePost,
-  resetList
+  resetList,
+  toggleDrawer,
+  mobileOpen
 }) {
   const classes = useStyles()
 
@@ -59,7 +75,7 @@ function SideBar({
     }
   }
 
-  return (
+  const drawer = (
     <div className={classes.container}>
       <div className={classes.list}>
         <ListHeader text={'Reddit Posts'} />
@@ -90,6 +106,39 @@ function SideBar({
         <ListFooter handleDismissAll={removeAll} />
       </div>
     </div>
+  )
+
+  return (
+    <nav className={classes.drawer} aria-label='mailbox folders'>
+      <Hidden smUp implementation='css'>
+        <Drawer
+          //container={container}
+          variant='temporary'
+          anchor={'left'}
+          open={mobileOpen}
+          onClose={toggleDrawer}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown implementation='css'>
+        <Drawer
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          variant='permanent'
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Hidden>
+    </nav>
   )
 }
 
