@@ -1,0 +1,1 @@
+/* This is the main reducer where we are going to combine our simple reducers*/
