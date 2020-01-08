@@ -111,14 +111,30 @@ const useStyles = makeStyles({
   }
 })
 
-function SideBarItem({ author, created, title, num_comments, imgUrl }) {
+function SideBarItem({
+  author,
+  created,
+  title,
+  num_comments,
+  imgUrl,
+  handleClickEntry,
+  highlight,
+  readed
+}) {
   const classes = useStyles()
 
   return (
-    <div className={classes.itemContainer}>
+    <div
+      className={classes.itemContainer}
+      style={highlight ? { backgroundColor: '#4e5053' } : {}}
+      onClick={handleClickEntry}
+    >
       <div className={classes.headerItem}>
         <div className={classes.leftSide}>
-          <span className={classes.dot}></span>
+          <span
+            className={classes.dot}
+            style={readed ? { visibility: 'hidden' } : {}}
+          ></span>
           <span>{author}</span>
         </div>
         <span>{moment(moment.unix(created)).fromNow()}</span>

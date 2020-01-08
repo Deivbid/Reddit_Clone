@@ -1,9 +1,15 @@
-import { FETCHING_LIST, FETCHED_LIST, FAILED_LIST } from './actions'
+import {
+  FETCHING_LIST,
+  FETCHED_LIST,
+  FAILED_LIST,
+  SELECTED_POST
+} from './actions'
 
 const initialState = {
   entries: [],
   isFetching: false,
-  after: ''
+  after: '',
+  selectedPost: null
 }
 
 const EntriesList = (state = initialState, action) => {
@@ -37,6 +43,23 @@ const EntriesList = (state = initialState, action) => {
         ...state,
         isFetching: false
       }
+
+    case SELECTED_POST: {
+      const newList = state.entries.map((item) => {
+        if (item.data.id === payload.data.id) {
+          return {
+            ...item,
+            readed: true
+          }
+        }
+        return item
+      })
+      return {
+        ...state,
+        selectedPost: payload,
+        entries: newList
+      }
+    }
 
     default:
       return state

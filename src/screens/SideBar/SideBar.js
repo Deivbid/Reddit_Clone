@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   }
 })
 
-function SideBar({ list, getList }) {
+function SideBar({ list, getList, selectPost, selectedPost }) {
   const classes = useStyles()
 
   useEffect(() => {
@@ -31,6 +31,12 @@ function SideBar({ list, getList }) {
       getList()
     }
   }, [])
+
+  const handleClickEntry = (entry) => () => {
+    if (entry) {
+      selectPost(entry)
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -51,6 +57,11 @@ function SideBar({ list, getList }) {
                 title={item.data.title}
                 num_comments={item.data.num_comments}
                 imgUrl={imgUrl}
+                handleClickEntry={handleClickEntry(item)}
+                highlight={
+                  selectedPost ? selectedPost.data.id === item.data.id : false
+                }
+                readed={item.readed}
               />
             )
           })}
